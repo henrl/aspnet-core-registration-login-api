@@ -41,7 +41,7 @@ Changes made:
 
 ## Running the application
 * In the main project directory (not the solution directory), type `dotnet watch run`. It is best to run `dotnet build` beforehand to ensure the project compiles successfully. The console should give you the URL endpoint to interact with the application e.g. `http://localhost:4000`.
-* Open Postman and make a POST request to `http://localhost:4000/User/register` with payload body:
+* Open Postman and make a POST request to `http://localhost:4000/Users/register` with payload body:
 ```
 {
 	"firstname": "Test",
@@ -53,8 +53,8 @@ Changes made:
 ```
 Ensure you have selected the "raw" radio button and the "JSON (application\json)" option.
 * Click "Send". This should register the "test" user with password "password".
-* Send a GET request to `http://localhost:4000/User`. You should get a 401 Unauthorised error.
-* Login by sending a POST request to `http://localhost:4000/User/authenticate` with payload body:
+* Send a GET request to `http://localhost:4000/Users`. You should get a 401 Unauthorised error.
+* Login by sending a POST request to `http://localhost:4000/Users/authenticate` with payload body:
 ```
 {
 	"username": "test",
@@ -62,6 +62,6 @@ Ensure you have selected the "raw" radio button and the "JSON (application\json)
 }
 ```
 Ensure you have selected the "raw" radio button and the "JSON (application\json)" option. In the response body, you will receive a JWT token. Make a note of this token string.
-*  Send a GET request to `http://localhost:4000/User`, after selecting the Bearer Token option in the Type dropdown of the Authorization pane. Ensure that you have copied the token string from the previous step into the Token field. This should now show a list of all users in the database.
-*  In a similar manner to the previous step, send a GET request to `http://localhost:4000/User/1`. If you have included the JWT bearer token, it should show you the details of the user with ID 1.
-*  To update a user's details e.g. User 1, send a PUT request to `http://localhost:4000/User/1`.
+*  Send a GET request to `http://localhost:4000/Users`, after selecting the Bearer Token option in the Type dropdown of the Authorization pane. Ensure that you have copied the token string from the previous step into the Token field. This should now show a list of all users in the database.
+*  In a similar manner to the previous step, send a GET request to `http://localhost:4000/Users/1`. If you have included the JWT bearer token, it should show you the details of the user with ID 1.
+*  To update a user's details e.g. User 1, send a PUT request to `http://localhost:4000/Users/1`.
