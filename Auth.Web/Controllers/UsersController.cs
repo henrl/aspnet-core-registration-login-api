@@ -43,6 +43,8 @@ namespace WebApi.Controllers
             if (user == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
+            // Info on JWT authentication: https://medium.com/vandium-software/5-easy-steps-to-understanding-json-web-tokens-jwt-1164c0adfcec
+            // Info on what claims-based authorization is:L https://docs.microsoft.com/en-us/aspnet/core/security/authorization/claims?view=aspnetcore-2.2
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -99,8 +101,15 @@ namespace WebApi.Controllers
         public IActionResult GetById(int id)
         {
             var user =  _userService.GetById(id);
+            if (user == null) return BadRequest(new { message = "User not found" });
             var userDto = _mapper.Map<UserDto>(user);
-            return Ok(userDto);
+            return Ok(new {
+                Id = user.Id,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Bio = user.Bio
+            });
         }
 
         [HttpPut("{id}")]
@@ -114,13 +123,14 @@ namespace WebApi.Controllers
             {
                 // save 
                 _userService.Update(user, userDto.Password);
-                return Ok();
             } 
             catch(AppException ex)
             {
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
+
+            return Ok("Updated successfully.");
         }
 
         [HttpDelete("{id}")]
