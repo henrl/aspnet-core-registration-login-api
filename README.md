@@ -31,7 +31,7 @@ Changes made:
 * For more information, see https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-add-package .
 
 ## Integrating with the database (PostgreSQL)
-* Create a new database using pgAdmin called `auth_test`. Note the connection details for this database. You will need to fill out the `DataAccessPostgreSqlProvider` field in appsettings.json with these details.
+* Create a new database using pgAdmin called `auth_test`. Note the connection details for this database. You will need to fill out the `DataAccessPostgreSqlProvider` field in appsettings.Development.json with these details.
 * Download the package `Npgsql.EntityFrameworkCore.PostgreSQL` using the `dotnet add` command.
 * Type `dotnet ef migrations add <NAME_OF_MIGRATION>`.
 * Check in the migrations folder for the newly created migration. Open the migration file and make any necessary modifications to the schema constraints (if it makes a new table).
@@ -40,7 +40,7 @@ Changes made:
 * To reverse all migrations made to the database, type `dotnet ef migrations 0`.
 
 ## Running the application
-* In the main project directory (not the solution directory), type `dotnet run`. It is best to run `dotnet build` beforehand to ensure the project compiles successfully. The console should give you the URL endpoint to interact with the application e.g. `http://localhost:4000`.
+* In the main project directory (not the solution directory), type `dotnet watch run`. It is best to run `dotnet build` beforehand to ensure the project compiles successfully. The console should give you the URL endpoint to interact with the application e.g. `http://localhost:4000`.
 * Open Postman and make a POST request to `http://localhost:4000/User/register` with payload body:
 ```
 {
